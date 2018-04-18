@@ -202,8 +202,8 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 	p[256+i] = p[i] = permutation[i];
   }
   double pnoise(double x, double y, double z)  {
-	int X = (int)floor(x) & 255, /* FIND UNIT CUBE THAT */
-	Y = (int)floor(y) & 255, /* CONTAINS POINT. */
+	  int X = (int)floor(x) & 255, /* FIND UNIT CUBE THAT */
+	  Y = (int)floor(y) & 255, /* CONTAINS POINT. */
 	  Z = (int)floor(z) & 255;
 	  x -= floor(x); /* FIND RELATIVE X,Y,Z */
 	  y -= floor(y); /* OF POINT IN CUBE. */
@@ -242,12 +242,12 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 	  noiseval = sizef * ((noiseval + 1.0)/2.0);
 	  return (int)noiseval;
   }
-  int fbm2d(int x, int y, double scalex, double scaley, int size, int octaves)
-    
-  double xf = (double)x;
-  double yf = (double)y;
-  double sizef = (double)size;
-  double noiseval = 0.0;
+  int fbm2d(int x, int y, double scalex, double scaley, int size, int octaves) {
+	double xf = (double)x;
+	double yf = (double)y;
+	double sizef = (double)size;
+	double noiseval = 0.0;
+  }
   int i;
   for(i = 1; i <= octaves; i++) {
 	  double n = pnoise(i * xf/(sizef * scalex), i * yf/(sizef * scaley), 0.5);
