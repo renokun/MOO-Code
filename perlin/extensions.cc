@@ -247,13 +247,14 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 	double yf = (double)y;
 	double sizef = (double)size;
 	double noiseval = 0.0;
-  }
+//  }
   int i;
   for(i = 1; i <= octaves; i++) {
 	  double n = pnoise(i * xf/(sizef * scalex), i * yf/(sizef * scaley), 0.5);
 	  n = sizef * ((n/2.0) + 0.5);
 	  noiseval = noiseval + n / (double)i;
       return (int)noiseval;
+  }
   }
   static package bf_perlin_2d(Var arglist, Byte next, void *vdata, Objid progr) {
 	  Var r;
