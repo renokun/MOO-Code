@@ -171,22 +171,6 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 }
 #endif
 
-
-void
-register_extensions()
-{
-#if EXAMPLE
-    register_task_queue(stdin_enumerator);
-    register_function("read_stdin", 0, 0, bf_read_stdin);
-#endif
-#ifdef STUPID_VERB_CACHE
-    register_function("log_cache_stats", 0, 0, bf_log_cache_stats);
-    register_function("verb_cache_stats", 0, 0, bf_verb_cache_stats);
-#endif
-  register_function("perlin_2d", 6, 6, bf_perlin_2d, TYPE_INT,
-  TYPE_INT, TYPE_FLOAT, TYPE_FLOAT, TYPE_INT, TYPE_INT);
-}
-
   static int p[512];
   static int permutation[] = { 151,160,137,91,90,15,
   131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,
@@ -288,3 +272,18 @@ register_extensions()
   free_var(arglist);
   return make_var_pack(r);
   }
+
+void
+register_extensions()
+{
+#if EXAMPLE
+    register_task_queue(stdin_enumerator);
+    register_function("read_stdin", 0, 0, bf_read_stdin);
+#endif
+#ifdef STUPID_VERB_CACHE
+    register_function("log_cache_stats", 0, 0, bf_log_cache_stats);
+    register_function("verb_cache_stats", 0, 0, bf_verb_cache_stats);
+#endif
+  register_function("perlin_2d", 6, 6, bf_perlin_2d, TYPE_INT,
+  TYPE_INT, TYPE_FLOAT, TYPE_FLOAT, TYPE_INT, TYPE_INT);
+}
