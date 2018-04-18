@@ -30,6 +30,11 @@
  * link in your extensions.
  */
 
+ /*	Perlin Noise code courtesty of HellCore Wayfar-1444
+ *	Original file included in repo, original repo can be found at:
+ *	https://github.com/genmac/HellCore---Wayfar-1444-Tutorials
+ *	http://wayfar1444.blogspot.com/2016/01/adding-2d-perlin-noise-to.html
+ */
 #define EXAMPLE 0
 
 #include "bf_register.h"
