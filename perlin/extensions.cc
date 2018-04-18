@@ -35,6 +35,7 @@
 #include "bf_register.h"
 #include "functions.h"
 #include "db_tune.h"
+#include "math.h"
 
 #if EXAMPLE
 
