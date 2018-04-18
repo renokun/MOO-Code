@@ -194,54 +194,51 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
   double grad(int hash, double x, double y, double z);
   void init_noise();
   double pnoise(double x, double y, double z);
-  void init_noise()
-  {
-  int i;
-  for(i = 0; i < 256 ; i++)
-  p[256+i] = p[i] = permutation[i];
+  void init_noise() {
+	int i;
+	for(i = 0; i < 256 ; i++)
+	p[256+i] = p[i] = permutation[i];
   }
-  double pnoise(double x, double y, double z)
-  {
-  int X = (int)floor(x) & 255, /* FIND UNIT CUBE THAT */
-  Y = (int)floor(y) & 255, /* CONTAINS POINT. */
-  Z = (int)floor(z) & 255;
-  x -= floor(x); /* FIND RELATIVE X,Y,Z */
-  y -= floor(y); /* OF POINT IN CUBE. */
-  z -= floor(z);
-  double u = fade(x), /* COMPUTE FADE CURVES */
-  v = fade(y), /* FOR EACH OF X,Y,Z. */
-  w = fade(z);
-  int A = p[X]+Y,
-  AA = p[A]+Z,
-  AB = p[A+1]+Z, /* HASH COORDINATES OF */
-  B = p[X+1]+Y,
-  BA = p[B]+Z,
-  BB = p[B+1]+Z; /* THE 8 CUBE CORNERS, */
-  return lerp(w,lerp(v,lerp(u, grad(p[AA ], x, y, z), /* AND ADD */
-  grad(p[BA ], x-1, y, z)), /* BLENDED */
-  lerp(u, grad(p[AB ], x, y-1, z), /* RESULTS */
-  grad(p[BB ], x-1, y-1, z))), /* FROM 8 */
-  lerp(v, lerp(u, grad(p[AA+1], x, y, z-1 ),/* CORNERS */
-  grad(p[BA+1], x-1, y, z-1)), /* OF CUBE */
-  lerp(u, grad(p[AB+1], x, y-1, z-1),
-  grad(p[BB+1], x-1, y-1, z-1))));
+  double pnoise(double x, double y, double z)  {
+	int X = (int)floor(x) & 255, /* FIND UNIT CUBE THAT */
+	Y = (int)floor(y) & 255, /* CONTAINS POINT. */
+	  Z = (int)floor(z) & 255;
+	  x -= floor(x); /* FIND RELATIVE X,Y,Z */
+	  y -= floor(y); /* OF POINT IN CUBE. */
+	  z -= floor(z);
+	  double u = fade(x), /* COMPUTE FADE CURVES */
+	  v = fade(y), /* FOR EACH OF X,Y,Z. */
+	  w = fade(z);
+	  int A = p[X]+Y,
+	  AA = p[A]+Z,
+	  AB = p[A+1]+Z, /* HASH COORDINATES OF */
+	  B = p[X+1]+Y,
+	  BA = p[B]+Z,
+	  BB = p[B+1]+Z; /* THE 8 CUBE CORNERS, */
+	  return lerp(w,lerp(v,lerp(u, grad(p[AA ], x, y, z), /* AND ADD */
+	  grad(p[BA ], x-1, y, z)), /* BLENDED */
+	  lerp(u, grad(p[AB ], x, y-1, z), /* RESULTS */
+	  grad(p[BB ], x-1, y-1, z))), /* FROM 8 */
+	  lerp(v, lerp(u, grad(p[AA+1], x, y, z-1 ),/* CORNERS */
+	  grad(p[BA+1], x-1, y, z-1)), /* OF CUBE */
+	  lerp(u, grad(p[AB+1], x, y-1, z-1),
+	  grad(p[BB+1], x-1, y-1, z-1))));
   }
   double fade(double t){ return t * t * t * (t * (t * 6 - 15) + 10); }
   double lerp(double t, double a, double b){ return a + t * (b - a); }
-  double grad(int hash, double x, double y, double z)
-  {
-  int h = hash & 15; /* CONVERT LO 4 BITS OF HASH CODE */
-  double u = h < 8 ? x : y, /* INTO 12 GRADIENT DIRECTIONS. */
-  v = h < 4 ? y : h==12||h==14 ? x : z;
-  return ((h&1) == 0 ? u : -u) + ((h&2) == 0 ? v : -v);
+  double grad(int hash, double x, double y, double z) {
+	  int h = hash & 15; /* CONVERT LO 4 BITS OF HASH CODE */
+	  double u = h < 8 ? x : y, /* INTO 12 GRADIENT DIRECTIONS. */
+	  v = h < 4 ? y : h==12||h==14 ? x : z;
+	  return ((h&1) == 0 ? u : -u) + ((h&2) == 0 ? v : -v);
   }
   int noise2d(int x, int y, double scalex, double scaley, int size) {
-  double xf = (double)x;
-  double yf = (double)y;
-  double sizef = (double)size;
-  double noiseval = pnoise(xf/(sizef * scalex), yf/(sizef * scaley), 0.5);
-  noiseval = sizef * ((noiseval + 1.0)/2.0);
-  return (int)noiseval;
+	  double xf = (double)x;
+	  double yf = (double)y;
+	  double sizef = (double)size;
+	  double noiseval = pnoise(xf/(sizef * scalex), yf/(sizef * scaley), 0.5);
+	  noiseval = sizef * ((noiseval + 1.0)/2.0);
+	  return (int)noiseval;
   }
   int fbm2d(int x, int y, double scalex, double scaley, int size, int octaves)
     
@@ -251,26 +248,26 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
   double noiseval = 0.0;
   int i;
   for(i = 1; i <= octaves; i++) {
-  double n = pnoise(i * xf/(sizef * scalex), i * yf/(sizef * scaley), 0.5);
-  n = sizef * ((n/2.0) + 0.5);
-  noiseval = noiseval + n / (double)i;
+	  double n = pnoise(i * xf/(sizef * scalex), i * yf/(sizef * scaley), 0.5);
+	  n = sizef * ((n/2.0) + 0.5);
+	  noiseval = noiseval + n / (double)i;
   }
   return (int)noiseval;
+//  }
+  static package bf_perlin_2d(Var arglist, Byte next, void *vdata, Objid progr) {
+	  Var r;
+	  int x = (int)arglist.v.list[1].v.num;
+	  int y = (int)arglist.v.list[2].v.num;
+	  double alpha = *arglist.v.list[3].v.fnum;
+	  double beta = *arglist.v.list[4].v.fnum;
+	  int n = (int)arglist.v.list[5].v.num;
+	  int octaves = (int)arglist.v.list[6].v.num;
+	  init_noise();
+	  r.v.num = (int)fbm2d(x, y, alpha, beta, n, octaves);
+	  r.type = TYPE_INT;
+	  free_var(arglist);
+	  return make_var_pack(r);
   }
-  static package bf_perlin_2d(Var arglist, Byte next, void *vdata, Objid progr)
-  {
-  Var r;
-  int x = (int)arglist.v.list[1].v.num;
-  int y = (int)arglist.v.list[2].v.num;
-  double alpha = *arglist.v.list[3].v.fnum;
-  double beta = *arglist.v.list[4].v.fnum;
-  int n = (int)arglist.v.list[5].v.num;
-  int octaves = (int)arglist.v.list[6].v.num;
-  init_noise();
-  r.v.num = (int)fbm2d(x, y, alpha, beta, n, octaves);
-  r.type = TYPE_INT;
-  free_var(arglist);
-  return make_var_pack(r);
   }
 
 void
