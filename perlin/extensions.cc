@@ -172,8 +172,7 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 }
 #endif
 
-// Perlin Noise code [[
-
+// Wayfar Perlin Noise code [[
   static int p[512];
   static int permutation[] = { 151,160,137,91,90,15,
   131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,
@@ -249,8 +248,8 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 	double sizef = (double)size;
 	double noiseval = 0.0;
   }
-//  int i;
-  for(int i = 1; i <= octaves; i++) {
+  int i;
+  for(i = 1; i <= octaves; i++) {
 	  double n = pnoise(i * xf/(sizef * scalex), i * yf/(sizef * scaley), 0.5);
 	  n = sizef * ((n/2.0) + 0.5);
 	  noiseval = noiseval + n / (double)i;
@@ -270,9 +269,7 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 	  free_var(arglist);
 	  return make_var_pack(r);
   }
-//  }
-
-// ]] Perlin Noise code  
+// ]] Wayfar Perlin Noise code  
   
 void
 register_extensions()
@@ -285,8 +282,8 @@ register_extensions()
     register_function("log_cache_stats", 0, 0, bf_log_cache_stats);
     register_function("verb_cache_stats", 0, 0, bf_verb_cache_stats);
 #endif
-// Perlin Noise code [[
+// Wayfar Perlin Noise code [[
   register_function("perlin_2d", 6, 6, bf_perlin_2d, TYPE_INT,
   TYPE_INT, TYPE_FLOAT, TYPE_FLOAT, TYPE_INT, TYPE_INT);
-// ]] Perlin Noise code
+// ]] Wayfar Perlin Noise code
 }
