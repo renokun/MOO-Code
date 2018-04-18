@@ -249,14 +249,13 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 	double sizef = (double)size;
 	double noiseval = 0.0;
   }
-  int i;
-  for(i = 1; i <= octaves; i++) {
+//  int i;
+  for(int i = 1; i <= octaves; i++) {
 	  double n = pnoise(i * xf/(sizef * scalex), i * yf/(sizef * scaley), 0.5);
 	  n = sizef * ((n/2.0) + 0.5);
 	  noiseval = noiseval + n / (double)i;
+      return (int)noiseval;
   }
-  return (int)noiseval;
-//  } // commenting out to see if this fixes the error
   static package bf_perlin_2d(Var arglist, Byte next, void *vdata, Objid progr) {
 	  Var r;
 	  int x = (int)arglist.v.list[1].v.num;
@@ -271,7 +270,7 @@ bf_log_cache_stats(Var arglist, Byte next, void *vdata, Objid progr)
 	  free_var(arglist);
 	  return make_var_pack(r);
   }
-  }
+//  }
 
 // ]] Perlin Noise code  
   
