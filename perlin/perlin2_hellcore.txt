@@ -119,6 +119,6 @@ octaves = 1;
 
 index = perlin_2d(px, py, alpha, beta, size, octaves);
 
- alpha, and beta are floats that affect the jagged/smoothness of the generated area.  octaves runs the noise function multiple times - WARNING - if you have a set number, for instance when selecting a list of biomes, this will cause values to fall outside the range of the list you've created.  For instance using multiple octaves with the list of 3 biomes above would result in many values at x, y co-ordinates of 4-8.  If you're using the noise to set altitude, you may wish to use the octave setting.
+alpha, and beta are floats that affect the jagged/smoothness of the generated area.  octaves runs the noise function multiple times - WARNING - if you have a set number, for instance when selecting a list of biomes, this will cause values to fall outside the range of the list you've created.  For instance using multiple octaves with the list of 3 biomes above would result in many values at x, y co-ordinates of 4-8.  If you're using the noise to set altitude, you may wish to use the octave setting.
 
 If you want to generate an entire map you would call this function repeatedly over the size of your map. Or, more usefully, you call it when a specific co-ordinate is needed. As long as the input to perlin_2d is the same, the index return will always be the same.
